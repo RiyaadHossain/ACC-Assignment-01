@@ -117,7 +117,7 @@ const updateRandomUsers = (req, res) => {
 // 6. Delete a User________________________
 const deleteUser = (req, res) => {
     const { Id } = req.body
-    const selectedUser = parsedData.filter(user => user.Id !== Number(Id))
+    const selectedUser = parsedData.filter(user => user.Id != Number(Id))
 
     if (isNaN(Number(Id)) || !Id) {
         res.status(403).json({ error: "Please provide the correct Id" })
