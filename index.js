@@ -1,8 +1,8 @@
 import { readFileSync } from 'fs';
-const express = require('express');
+import express from "express"
 const PORT = process.env.PORT || 5000
 const app = express()
-let data = readFileSync("./data.json")
+let data = readFileSync("data.json")
 let parsedData = JSON.parse(data)
 
 // Middleware
