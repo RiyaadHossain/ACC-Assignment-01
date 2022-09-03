@@ -63,20 +63,27 @@ const saveUser = (req, res) => {
 
 }
 
-// 4. Update a User________________________
+// 4. Update a Random User________________________
 const updateUser = (req, res) => {
-
+ 
+    let id;
     const { Id, gender, name, contact, address, photoUrl } = req.body
-    if (!Id || !gender || !name || !contact || !address || !photoUrl) {
-        return res.status(403).json({ error: "Please provide Id, gender, name, contact, address, photoUrl property." })
+    if (!gender || !name || !contact || !address || !photoUrl) {
+        return res.status(403).json({ error: "Please provide gender, name, contact, address, photoUrl property." })
     }
 
-    const updatedUser = { Id, gender, name, contact, address, photoUrl }
-    const userExist = parsedData.find(user => user.Id == Number(Id))
+    if (Id) {
+        id = Id
+    } else {
+        id = Math.floor(Math.random() * (parsedData.length - 1)) + 1;
+    }
+
+    const updatedUser = { id, gender, name, contact, address, photoUrl }
+    const userExist = parsedData.find(user => user.Id == Number(id))
     if (!userExist) {
         res.status(403).json({ error: "User data not found" })
     } else if (updatedUser) {
-        parsedData = parsedData.map(user => user.Id != Number(Id) ? user : updatedUser)
+        parsedData = parsedData.map(user => user.Id != Number(id) ? user : updatedUser)
         writeFileSync(file, JSON.stringify(parsedData))
         res.status(201).json({ message: "User data updated successfully" })
     } else {
@@ -85,7 +92,7 @@ const updateUser = (req, res) => {
 
 }
 
-// 5. Update Random Users________________________
+// 5. Update Multiple Users________________________
 const updateRandomUsers = (req, res) => {
 
     const { Id, gender, name, contact, address, photoUrl } = req.body
