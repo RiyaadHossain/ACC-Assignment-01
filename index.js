@@ -78,7 +78,7 @@ const updateUser = (req, res) => {
         id = Math.floor(Math.random() * (parsedData.length - 1)) + 1;
     }
 
-    const updatedUser = { id, gender, name, contact, address, photoUrl }
+    const updatedUser = { Id: id, gender, name, contact, address, photoUrl }
     const userExist = parsedData.find(user => user.Id == Number(id))
     if (!userExist) {
         res.status(403).json({ error: "User data not found" })
