@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import express from "express"
 const PORT = process.env.PORT || 5000
 const app = express()
@@ -49,7 +49,7 @@ const saveUser = (req, res) => {
             res.status(403).json({ error: "Id is already Exist" })
         } else if (typeof Number(Id) == "number" && Number(Id) > 0) {
             parsedData.push({ Id, gender, name, contact, address, photoUrl })
-            fs.writeFileSync("data.json", JSON.stringify(parsedData))
+            writeFileSync("data.json", JSON.stringify(parsedData))
             res.status(201).json({ message: "Your data has been saved successfully." })
         } else {
             res.status(403).json({ error: "The Id you privided isn't correct!" })
@@ -75,7 +75,7 @@ const updateUser = (req, res) => {
         res.status(403).json({ error: "User data not found" })
     } else if (updatedUser) {
         parsedData = parsedData.map(user => user.Id != Number(Id) ? user : updatedUser)
-        fs.writeFileSync("data.json", JSON.stringify(parsedData))
+        writeFileSync("data.json", JSON.stringify(parsedData))
         res.status(201).json({ message: "User data updated successfully" })
     } else {
         res.status(500).json({ error: "Internal Server Error" })
@@ -107,7 +107,7 @@ const updateRandomUsers = (req, res) => {
         parsedData = parsedData.map(data => data.Id == user.Id ? { ...updatedUser, Id: user.Id } : data)
     }
 
-    fs.writeFileSync("data.json", JSON.stringify(parsedData))
+    writeFileSync("data.json", JSON.stringify(parsedData))
     res.status(201).json({ message: "Users data updated successfully" })
 
 }
@@ -124,7 +124,7 @@ const deleteUser = (req, res) => {
         res.status(403).json({ error: "User not found! Please type the correct Id." })
     }
     else if (selectedUser) {
-        fs.writeFileSync("data.json", JSON.stringify(selectedUser))
+        writeFileSync("data.json", JSON.stringify(selectedUser))
         res.status(201).send({ message: "User deleted successfully." })
     } else {
         res.status(403).json({ error: "User not found! Please type the correct Id." })
