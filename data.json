@@ -34,13 +34,13 @@
   {
     "Id": 5,
     "gender": "male",
-    "name": "Abdur Rahim",
+    "name": "Abdur Rahman",
     "contact": "097970979",
     "address": "Dhaka city",
     "photoUrl": "https://www.myphoto.com/sangram"
   },
   {
-    "Id": "6",
+    "Id": 6,
     "gender": "male",
     "name": "Abdur Rahman",
     "contact": "097970979",
