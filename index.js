@@ -1,12 +1,12 @@
 const express = require('express');
 const PORT = process.env.PORT || 5000
-const userRoute = require("./router/userRoute")
+// const userRoute = require("./router/userRoute")
 
 const app = express()
 
 // Middleware
 app.use(express.json())
-app.use("/user", userRoute)
+// app.use("/user", userRoute)
 
 // Health Check
 app.get("/", (req, res) => {
