@@ -3,7 +3,7 @@ import express from "express"
 import path from 'path';
 const PORT = process.env.PORT || 5000
 const app = express()
-const file = path.join('data.json');
+const file = path.join(process.cwd(), 'data.json');
 let data = readFileSync(file)
 let parsedData = JSON.parse(data)
 
